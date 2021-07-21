@@ -8,12 +8,11 @@ class PortfolioContainer extends Component {
       <div>
         <h2>My Portfolio</h2>
           {
-            //render your portfolio stocks here
+            this.props.portfolioStocks.map((stock,idx) => <Stock key={idx} stock={stock} handleRemoveClick={this.props.handleRemoveClick}/>)
           }
       </div>
     );
   }
-
 }
 
 export default PortfolioContainer;
