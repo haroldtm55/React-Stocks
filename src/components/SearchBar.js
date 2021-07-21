@@ -23,8 +23,6 @@ const SearchBar = ({searchBar, handleSortChange, handleFilterChange}) => {
           <option value="Finance">Finance</option>
         </select>
       </label>
-
-
     </div>
   );
 }
