@@ -8,7 +8,8 @@ class StockContainer extends Component {
       <div>
         <h2>Stocks</h2>
         {
-          this.renderStocks(this.props)
+          this.sortAndFilterStocks(this.props).map(stock=> 
+            <Stock key={stock.id} id={stock.id} stock={stock} handleAddClick={this.props.handleAddClick}/>)
         }
       </div>
     );
@@ -35,18 +36,16 @@ class StockContainer extends Component {
     }
   }
 
-  renderStocks = ({filteredStocksArr,stocksArr,itemChecked, handleAddClick}) => {
-    const stocks = stocksArr.filter(stock => stock.type === 'Tech').map(stock=> <Stock key={stock.id} stock={stock} handleAddClick={handleAddClick}/>)
-    const filteredStocks = filteredStocksArr.map(stock => <Stock key={stock.id} stock={stock} handleAddClick={handleAddClick}/>)
+  sortAndFilterStocks = ({filteredStocksArr,stocksArr,itemChecked}) => {
     if (itemChecked === '') {
-      return filteredStocksArr.length === 0 ? stocks : filteredStocks
+      return filteredStocksArr.length === 0 ? stocksArr.filter(stock => stock.type === 'Tech') : filteredStocksArr
     }
     else {
       if (filteredStocksArr.length === 0) {
-        return this.sortArray(stocksArr,itemChecked).filter(stock => stock.type === 'Tech').map(stock=> <Stock key={stock.id} stock={stock} handleAddClick={handleAddClick}/>)
+        return this.sortArray(stocksArr,itemChecked).filter(stock => stock.type === 'Tech')
       }
       else {
-        return this.sortArray(filteredStocksArr,itemChecked).map(stock=> <Stock key={stock.id} stock={stock} handleAddClick={handleAddClick}/>)
+        return this.sortArray(filteredStocksArr,itemChecked)
       }
     }
   }
@@ -54,3 +53,5 @@ class StockContainer extends Component {
 }
 
 export default StockContainer;
+
+//.map(stock=> <Stock key={stock.id} id={stock.id} stock={stock} handleAddClick={handleAddClick}/>)

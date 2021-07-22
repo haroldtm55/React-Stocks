@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Stock = ({stock, handleAddClick, handleRemoveClick}) => (
-  <div onClick={handleRemoveClick}>
-    <div className="card" onClick={handleAddClick}>
+const Stock = ({stock, handleAddClick, handleRemoveClick, id}) => (
+  <div onClick={null}>
+    <div className="card" onClick={(e)=>!!handleAddClick ? handleAddClick(e,id) : handleRemoveClick(e,id)}>
       <div className="card-body">
         <h5 className="card-title">{
             stock.name

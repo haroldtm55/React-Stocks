@@ -43,8 +43,8 @@ class MainContainer extends Component {
 
               <PortfolioContainer 
               portfolioStocks={this.state.portfolioStocks} 
-              handleRemoveClick={this.handleRemoveClick}/>
-
+              handleRemoveClick={this.handleRemoveClick}
+              />
             </div>
           </div>
       </div>
@@ -75,18 +75,19 @@ class MainContainer extends Component {
     })
   }
   
-  handleAddClick = e => {
+  handleAddClick = (e,id) => {
     const portfolioStocksCopy = [...this.state.portfolioStocks]
-    portfolioStocksCopy.push(this.state.stocksArr.find(stock => stock.name === e.target.textContent))
+    portfolioStocksCopy.push(this.state.stocksArr.find(stock => stock.id === id))
+    const portfolioUniqueStocks = [...portfolioStocksCopy].filter((stock,index,array)=>array.indexOf(stock)===index)
     this.setState({
-        portfolioStocks: portfolioStocksCopy 
+        portfolioStocks: portfolioUniqueStocks 
     })
   }
 
-  handleRemoveClick = e => {
+  handleRemoveClick = (e,id) => {
     let portfolioStocksCopy = [...this.state.portfolioStocks]
     this.setState({
-      portfolioStocks: portfolioStocksCopy.filter(stock => stock.name !== e.target.textContent) 
+      portfolioStocks: portfolioStocksCopy.filter(stock => stock.id !== id)
     })
   }
 }
